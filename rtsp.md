@@ -20,35 +20,29 @@
   RTSP通信是基于TCP的。RTP和RTCP视为数据包。数据包的传输可以通过TCP或者UDP。
 
 - RTSP信令交互过程  
-  推流：
-  拉流：
+  推流：announce setup record
+  
+  拉流：setup play
 
 - RTSP OVER TCP 的报文及通信细节    
-  报文标识 端口确定
+  直接用信令链接通信。4字节分隔符 
+  
+  magic number：   RTP数据标识符，"$" 一个字节
+
+  channel number： 信道数字 - 1个字节，用来指示信道
+  
+  data length ：   数据长度 - 2个字节，用来指示插入数据长度
 
 - RTSP OVER UDP 的报文及通信细节    
-  报文标识 端口确定 UDP包的大小设置
+   需要确定发送端和接收端的端口，所以一共有2对端口。RTP是偶数  RTCP是奇数
+   数据从发送端口发送到接收端口。  端口对应端口。
+   和一般的UDP不同，一般的UDP发送端口没有指定。
 
 - RTSP MULTICAST 的报文及通信细节    
-  报文标识 端口确定
+  同UDP 只不过有在sdp中指定组播IP 和 端口
 
 - RTSP 鉴权  
-  在哪一步鉴权  两种鉴权方式
-
-- RTP 包头  
-  包头结构及解释 应用需要关注的字段
-
-- RTP H264 packet  
-  封装264的几种格式
-
-- RTP H265 packet  
-  封装264的几种格式
-
-- RTP 音频的封装格式  
-  AAC G711A PCM
-
-- SDP 的解读  
-  每一段是怎么开始结束的
+  一般在option就鉴权了。   BASIC 和 DIGIST
 
 - RTCP 概述   
   质量监控： RTCP用于监控实时传输的质量。通过定期发送RTCP包，参与者可以了解会话的网络状况、数据包丢失率、延迟等信息。这有助于识别潜在的问题，并采取措施来改善传输质量。

@@ -1,0 +1,2 @@
+- g711a 直接怼  
+- aac 4字节 0x00 0x10 length + aac data
